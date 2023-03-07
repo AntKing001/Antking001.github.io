@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on My Hugo Site</title>
+    <link>https://Antking001.github.io/post/</link>
+    <description>Recent content in Posts on My Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 07 Mar 2023 21:05:31 +0800</lastBuildDate><atom:link href="https://Antking001.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算机网络</title>
+      <link>https://Antking001.github.io/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
+      <pubDate>Tue, 07 Mar 2023 21:05:31 +0800</pubDate>
+      
+      <guid>https://Antking001.github.io/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</guid>
+      <description>物理层 主要任务：确定与传输媒体接口有关的特性 机械特性：规定物理的特性，如采用规格，接口形状，引线数目，引脚数量和排列情况。 电气特性：规定传输二进制时，线路上的电压范围，阻抗匹配，传输速率和距离限制等。 功能特性：指明某条线上出现的某一电平表示何种意义，接口部件的信号线用途。 规程特性：定义各条物理线路的工作规程和时许关系 数据通信的相关术语 数据：传送信息的实体。 信号：数据的电气/电磁的表现，时数据在传输过程中的存在形式。 信源：产生和发送数据的源头。 信宿：接收数据的终点 信道：信号传送的媒介，一般用来表示传送信息的介质，因此一条通信信道通常包含一条一条发送信道和接受信道。 信道 传输信号: 模拟信道（传递模拟信号） 数字信道（传递数字信号） 传输介质: 无线信道 有线信道 三种通信方式 单工通信：只有一个方向通信而没有反方向的交互，仅需一条信道。 半双工通信：通信双方都可以发送货接受信息，任何一方都不能同时发送和接受，需要两天信道。 全双工通信：通信双发可以同时发送和接受信息，也需要两条信道。 两种数据传输方式 串行传输：速度慢，费用低，适合远距离 并行传输，速度快，费用高，适合近距离，主要用于计算机内部传输 </description>
+    </item>
+    
+  </channel>
+</rss>
