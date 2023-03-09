@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>操作系统 // 始于迁至</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.111.2">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="始于迁至" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.3c3c186cd62e563ad6e2f00a89dbee656ab912d1d46f856b5605dd0232521e2a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="操作系统"/>
+<meta name="twitter:description" content="预防死锁 破坏互斥条件：将临界资源改造为可共享资源（SPOOling技术）
+缺点：可行性不高，很多时候无法破坏互斥条件
+破坏不剥夺条件： 申请资源得不到满足，立即释放所拥有的所有资源
+申请的资源被其它进程占用，由操作系统协助剥夺（考虑优先级）
+缺点：实现复杂，剥夺资源可能导致部分工作实效：反复申请和释放导致系统开销大；可能导致饥饿
+破坏请求和保持条件 ：运行前分配好所需的资源，之后一直保持
+缺点：资源利用率低，可能导致饥饿
+破坏循环等待条件：给资源编号从小到大的顺序申请资源
+缺点：不方便增加新设备；会导致资源浪费：用户编程麻烦
+避免死锁 安全序列：如果系统按照当前这种序列分配资源，则每个进程都能顺利完成。只要能找出一个安全序列，系统就是安全状态。当然安全序列可能有多个。如果分配了系统资源之后系统找不出任何一个安全序列，洗头就进入了不安全状态。这就意味着之后的所有进程可能都无法顺利的执行下去，当然，如果有序列提前归还了一些资源，那系统也就有可能重新回到安全状态，但我们在分配资源之前总是要考虑到最坏的情况。
+如果系统处于安全状态，就一定不会发生死锁，如果系统进入不安全状态，就有可能发生死锁（处于安全不安全状态未必发生死锁，但在发生死锁时一定是在不安全状态）
+银行家算法 核心思想：在进程提出资源时，先预判此次分配是否会导致系统进入不安全状态。如果会进入不安全状态，就暂时不答应这次请求，让该进程阻塞等待。 在计算机系统当中有多种资源时，可以将一维的数字扩展为多维的向量。
+算法步骤：
+检查此次申请是否超过了之前声明的最大需求数 看出此时系统剩余的可用资源是否还能满足这次请求 试探着分配，更改数据结构 用安全性算法检查此次分配是否会导致系统进入不安全状态 安全性算法步骤：检查当前的剩余可用资源是否能满足某个进程的最大需求，如果可以，就把该进程加入安全序列，并把该进程持有的资源全部回收。不断重复上述过程，看最终是否能够让所有进程都加入安全序列。"/>
+
+    <meta property="og:title" content="操作系统" />
+<meta property="og:description" content="预防死锁 破坏互斥条件：将临界资源改造为可共享资源（SPOOling技术）
+缺点：可行性不高，很多时候无法破坏互斥条件
+破坏不剥夺条件： 申请资源得不到满足，立即释放所拥有的所有资源
+申请的资源被其它进程占用，由操作系统协助剥夺（考虑优先级）
+缺点：实现复杂，剥夺资源可能导致部分工作实效：反复申请和释放导致系统开销大；可能导致饥饿
+破坏请求和保持条件 ：运行前分配好所需的资源，之后一直保持
+缺点：资源利用率低，可能导致饥饿
+破坏循环等待条件：给资源编号从小到大的顺序申请资源
+缺点：不方便增加新设备；会导致资源浪费：用户编程麻烦
+避免死锁 安全序列：如果系统按照当前这种序列分配资源，则每个进程都能顺利完成。只要能找出一个安全序列，系统就是安全状态。当然安全序列可能有多个。如果分配了系统资源之后系统找不出任何一个安全序列，洗头就进入了不安全状态。这就意味着之后的所有进程可能都无法顺利的执行下去，当然，如果有序列提前归还了一些资源，那系统也就有可能重新回到安全状态，但我们在分配资源之前总是要考虑到最坏的情况。
+如果系统处于安全状态，就一定不会发生死锁，如果系统进入不安全状态，就有可能发生死锁（处于安全不安全状态未必发生死锁，但在发生死锁时一定是在不安全状态）
+银行家算法 核心思想：在进程提出资源时，先预判此次分配是否会导致系统进入不安全状态。如果会进入不安全状态，就暂时不答应这次请求，让该进程阻塞等待。 在计算机系统当中有多种资源时，可以将一维的数字扩展为多维的向量。
+算法步骤：
+检查此次申请是否超过了之前声明的最大需求数 看出此时系统剩余的可用资源是否还能满足这次请求 试探着分配，更改数据结构 用安全性算法检查此次分配是否会导致系统进入不安全状态 安全性算法步骤：检查当前的剩余可用资源是否能满足某个进程的最大需求，如果可以，就把该进程加入安全序列，并把该进程持有的资源全部回收。不断重复上述过程，看最终是否能够让所有进程都加入安全序列。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Antking001.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-09T09:58:36+08:00" />
+<meta property="article:modified_time" content="2023-03-09T09:58:36+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://Antking001.github.io"><img class="app-header-avatar" src="https://i.328888.xyz/2023/03/07/5j8cN.jpeg" alt="始于迁至" /></a>
+      <span class="app-header-title">始于迁至</span>
+      <p>星光不问赶路人，时光不负有心人</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/AntKing001" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">操作系统</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 9, 2023
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h3 id="预防死锁">预防死锁</h3>
+<h5 id="heading"></h5>
+<ol>
+<li>
+<p>破坏互斥条件：将临界资源改造为可共享资源（SPOOling技术）<br>
+缺点：可行性不高，很多时候无法破坏互斥条件</p>
+</li>
+<li>
+<p>破坏不剥夺条件：
+申请资源得不到满足，立即释放所拥有的所有资源<br>
+申请的资源被其它进程占用，由操作系统协助剥夺（考虑优先级）<br>
+缺点：实现复杂，剥夺资源可能导致部分工作实效：反复申请和释放导致系统开销大；可能导致饥饿</p>
+</li>
+<li>
+<p>破坏请求和保持条件 ：运行前分配好所需的资源，之后一直保持<br>
+缺点：资源利用率低，可能导致饥饿</p>
+</li>
+<li>
+<p>破坏循环等待条件：给资源编号从小到大的顺序申请资源<br>
+缺点：不方便增加新设备；会导致资源浪费：用户编程麻烦</p>
+</li>
+</ol>
+<h5 id="heading-1"></h5>
+<h3 id="避免死锁">避免死锁</h3>
+<h5 id="heading-2"></h5>
+<p>安全序列：如果系统按照当前这种序列分配资源，则每个进程都能顺利完成。只要能找出一个安全序列，系统就是安全状态。当然安全序列可能有多个。如果分配了系统资源之后系统找不出任何一个安全序列，洗头就进入了不安全状态。这就意味着之后的所有进程可能都无法顺利的执行下去，当然，如果有序列提前归还了一些资源，那系统也就有可能重新回到安全状态，但我们在分配资源之前总是要考虑到最坏的情况。</p>
+<p>如果系统处于安全状态，就一定不会发生死锁，如果系统进入不安全状态，就有可能发生死锁（处于安全不安全状态未必发生死锁，但在发生死锁时一定是在不安全状态）</p>
+<h5 id="heading-3"></h5>
+<h3 id="银行家算法">银行家算法</h3>
+<h5 id="heading-4"></h5>
+<p>核心思想：在进程提出资源时，先预判此次分配是否会导致系统进入不安全状态。如果会进入不安全状态，就暂时不答应这次请求，让该进程阻塞等待。
+在计算机系统当中有多种资源时，可以将一维的数字扩展为多维的向量。</p>
+<p>算法步骤：</p>
+<ol>
+<li>检查此次申请是否超过了之前声明的最大需求数</li>
+<li>看出此时系统剩余的可用资源是否还能满足这次请求</li>
+<li>试探着分配，更改数据结构</li>
+<li>用安全性算法检查此次分配是否会导致系统进入不安全状态</li>
+</ol>
+<p>安全性算法步骤：检查当前的剩余可用资源是否能满足某个进程的最大需求，如果可以，就把该进程加入安全序列，并把该进程持有的资源全部回收。不断重复上述过程，看最终是否能够让所有进程都加入安全序列。</p>
+<h5 id="heading-5"></h5>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
